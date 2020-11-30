@@ -1,10 +1,7 @@
 Topic_Arn = "arn:aws:sns:us-east-1:488180029535:Lab5"
 
-Subs_Arn = arn:aws:sns:us-east-1:545292694261:Lab5:058eafab-1a22-4603-9c81-95726ce6d9ea
 
--------
 aws sns create-topic --name Lab5 --query "TopicArn"
-
 aws sns subscribe --topic-arn arn:aws:sns:us-east-1:488180029535:Lab5 --protocol email --notification-endpoint "mantecanikita@gmail.com" --query SubscriptionArn
 
 aws cloudwatch put-metric-alarm --alarm-name LAB5 --alarm-description "NK_Lab5_Health" --metric-name HealthyHostCount --namespace AWS/ApplicationELB --statistic Minimum --period 300 --threshold 2 --evaluation-periods 2 --comparison-operator LessThanThreshold --dimensions Name=LoadBalancer,Value=app/Lab4/45f8c5420b150225 Name=TargetGroup,Value=targetgroup/Lab4/760b8cf8c047074c --alarm-actions arn:aws:sns:us-east-1:488180029535:Lab5 --unit Count
