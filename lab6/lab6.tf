@@ -9,8 +9,8 @@ data "aws_ami" "amazon_test" {
   owners = ["self"]
 }
 
-resource "aws_security_group" "SG"{
-    name = "ELB_SG"
+resource "aws_security_group" "lab6_SG"{
+    name = "lab6_sg"
     ingress {
         from_port   = 80
         to_port     = 80
@@ -24,11 +24,11 @@ resource "aws_security_group" "SG"{
     cidr_blocks = ["0.0.0.0/0"]
   }
    tags = {
-       Name = "ELB_SG"
+       Name = "lab6_SG"
    }
 }
-resource "aws_lb" "ELB" {
-    name = "ELB"
+resource "aws_lb" "lab6" {
+    name = "lab6"
     load_balancer_type = "application"
     subnets = ["subnet-eedc0e85", "subnet-7c363e06"]
     security_groups = [aws_security_group.SG.id]
@@ -39,7 +39,7 @@ resource "aws_lb" "ELB" {
 resource "aws_instance" "ec2" {
     ami = data.aws_ami.amazon_test.id
     count = 2
-    key_name = "KeyPair"
+    key_name = "LAB3"
     security_groups = [aws_security_group.SG.name] 
     instance_type = "t2.micro"
     tags = {
