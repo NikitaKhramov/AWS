@@ -1,6 +1,6 @@
 provider aws {
-    access_key = "AKIAXDKOMDBPV7MNSWKM"
-    secret_key = "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"
+    access_key = "***"
+    secret_key = "***"
     region = "us-east-1"
 }
 
@@ -123,7 +123,7 @@ resource "aws_db_instance" "rds_db" {
   instance_class         = "db.t2.micro"
   name                   = "dbtest"
   username               = "testuser"
-  password               = "password12345" //  export TF_VAR_MYSQL_PWD='password'
+  password               = "***" 
   publicly_accessible    = true
   skip_final_snapshot = true
   parameter_group_name   = "default.mysql5.7"
