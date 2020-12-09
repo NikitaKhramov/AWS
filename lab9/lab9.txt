@@ -1,0 +1,23 @@
+"taskDefinitionArns" : "arn:aws:ecs:us-east-1:488180029535:task-definition/sample-fargate:1", "arn:aws:ecs:us-east-1:488180029535:task-definition/sample-fargate:2"
+"serviceArns" : "arn:aws:ecs:us-east-1:488180029535:service/fargate-cluster/fargate-service"
+
+aws ecs create-cluster --cluster-name fargate-cluster
+
+aws ecs register-task-definition --cli-input-json file://task-definition.json
+
+aws ecs list-task-definitions
+
+aws ecs create-service --cluster fargate-cluster \
+--service-name fargate-service \
+--task-definition sample-fargate:1 \
+--desired-count 1 --launch-type "FARGATE" \
+--network-configuration "awsvpcConfiguration={subnets=[subnet-0c6d6e62ff34fde91],\
+securityGroups=[sg-0d816a6ee857b04cf]}"
+
+aws ecs list-services --cluster fargate-cluster
+
+aws ecs describe-services --cluster fargate-cluster --services fargate-service
+
+//aws ecs delete-service --cluster fargate-cluster --service fargate-service --force
+
+//aws ecs delete-cluster --cluster fargate-cluster
