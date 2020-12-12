@@ -43,7 +43,7 @@ resource "aws_instance" "ec2" {
     security_groups = [aws_security_group.SG.name] 
     instance_type = "t2.micro"
     tags = {
-    Name = format("Instance-%d", count.index)
+    Name = format("Instance-TF-%d", count.index)
   }
 }
 resource "aws_lb_target_group" "TG" {
